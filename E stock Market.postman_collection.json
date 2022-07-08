@@ -1,0 +1,261 @@
+{
+	"info": {
+		"_postman_id": "e911557d-fc23-4311-8797-df6eb6d08e5d",
+		"name": "E stock Market",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Register User",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"user3\",\r\n    \"username\":\"user3@gmail.com\",\r\n    \"password\" : \"user3\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/market/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login using JWT Token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\":\"user2@gmail.com\",\r\n    \"password\" : \"user\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/market/user/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"user",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Company",
+			"item": [
+				{
+					"name": "Register Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"userID\":\"14f041dc-b42d-4cad-810d-ce902be197fc\",\r\n    \"companyName\":\"Cognizant\",\r\n    \"companyCEO\":\"Siddhant Shah\",\r\n    \"companyTurnOver\":10273017938,\r\n    \"companyWebsite\":\"www.Cognizant.com\",\r\n    \"companyStockExchange\":\"NSE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/market/company/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"company",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Companies by User ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/market/company/fetchUserCompanies/0f872706-2508-4ca2-b727-59ed1851edf6",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"company",
+								"fetchUserCompanies",
+								"0f872706-2508-4ca2-b727-59ed1851edf6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Fetch Company details by Company ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/market/company/info/91c07381-4017-410d-ae58-788169b37ced",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"company",
+								"info",
+								"91c07381-4017-410d-ae58-788169b37ced"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Company",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/market/company/delete/91c07381-4017-410d-ae58-788169b37ced",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"company",
+								"delete",
+								"91c07381-4017-410d-ae58-788169b37ced"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all Companies",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/market/company/getall",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"company",
+								"getall"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Stock",
+			"item": [
+				{
+					"name": "Register Stock by Company",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stockName\":\"Cybage Graffiti\",\r\n    \"stockPrice\":\"244.65\",\r\n    \"companyId\":\"b6b59234-b059-442f-920f-41289dbc328a\",\r\n    \"startDate\":\"2022-06-10\",\r\n    \"endDate\":\"2022-06-11\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/market/stock/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"stock",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Stock details by Company ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/market/stock/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"market",
+								"stock",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

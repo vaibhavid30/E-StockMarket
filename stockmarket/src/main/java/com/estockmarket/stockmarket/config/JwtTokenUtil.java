@@ -6,24 +6,18 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
-import com.estockmarket.stockmarket.repositories.UserRepository;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
 @Component
-public class JwtUtil implements Serializable {
-    
+public class JwtTokenUtil implements Serializable {
 
-	@Autowired
-	UserRepository userRepo;
-	
 	private static final long serialVersionUID = -2550185165626007488L;
 
 	public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
@@ -59,12 +53,20 @@ public class JwtUtil implements Serializable {
 	//generate token for user
 	public String generateToken(UserDetails userDetails) {
 		Map<String, Object> claims = new HashMap<>();
-	
 		return doGenerateToken(claims, userDetails.getUsername());
-
-		//return doGenerateToken(claims, userDetails.getUsername());
 	}
 
+	public String generateJwtToken(Authentication authentication) {
+
+		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();
+	
+		return Jwts.builder()
+			.setSubject((userPrincipal.getUsername()))
+			.setIssuedAt(new Date())
+			.setExpiration(new Date((new Date()).getTime() + JWT_TOKEN_VALIDITY))
+			.signWith(SignatureAlgorithm.HS512, secret)
+			.compact();
+	  }
 	//while creating the token -
 	//1. Define  claims of the token, like Issuer, Expiration, Subject, and the ID
 	//2. Sign the JWT using the HS512 algorithm and secret key.
@@ -77,7 +79,6 @@ public class JwtUtil implements Serializable {
 				.signWith(SignatureAlgorithm.HS512, secret).compact();
 	}
 
-	
 	//validate token
 	public Boolean validateToken(String token, UserDetails userDetails) {
 		final String username = getUsernameFromToken(token);

@@ -1,32 +1,39 @@
 package com.estockmarket.stockmarket.model;
 
-public class JwtRequest {
-    
-	private String email;
+
+import java.io.Serializable;
+
+public class JwtRequest implements Serializable {
+
+	private static final long serialVersionUID = 5926468583005150707L;
+	
+	private String username;
 	private String password;
 	
-	
-	public JwtRequest(String email, String password) {
-		super();
-		this.email = email;
-		this.password = password;
-	}
-	
+	//need default constructor for JSON Parsing
 	public JwtRequest()
 	{
 		
 	}
-	public String getEmail() {
-		return email;
+
+	public JwtRequest(String username, String password) {
+		this.setUsername(username);
+		this.setPassword(password);
 	}
-	public void setEmail(String email) {
-		this.email = email;
+
+	public String getUsername() {
+		return this.username;
 	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
+
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
 }

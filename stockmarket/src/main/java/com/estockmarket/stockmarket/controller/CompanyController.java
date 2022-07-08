@@ -1,7 +1,6 @@
 package com.estockmarket.stockmarket.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.estockmarket.stockmarket.model.Company;
-import com.estockmarket.stockmarket.model.Stock;
 import com.estockmarket.stockmarket.service.CompanyService;
 
 @RestController

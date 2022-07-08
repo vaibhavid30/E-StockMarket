@@ -15,72 +15,58 @@ import org.springframework.security.web.authentication.WebAuthenticationDetailsS
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
+import com.estockmarket.stockmarket.service.UserService;
+
 import io.jsonwebtoken.ExpiredJwtException;
 
 @Component
-public class JwtRequestFilter extends OncePerRequestFilter{
-    
-	@Autowired
-	private CustomUserDetailService jwtUserDetailsService;
+public class JwtRequestFilter extends OncePerRequestFilter {
 
 	@Autowired
-	private JwtUtil jwtUtil;
+	private UserService userService;
 
+	@Autowired
+	private JwtTokenUtil jwtTokenUtil;
 
-    
 	@Override
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)
 			throws ServletException, IOException {
 
 		final String requestTokenHeader = request.getHeader("Authorization");
-		System.out.println(requestTokenHeader);
 
 		String username = null;
 		String jwtToken = null;
-		
-		
-		
-		  HttpServletResponse res = (HttpServletResponse) response;
-HttpServletRequest req = (HttpServletRequest) request;
-		  
-		  res.setHeader("Access-Control-Allow-Origin", "http://localhost:4200");
-		  res.setHeader("Access-Control-Allow-Methods",
-		  "POST, PUT, GET, OPTIONS, DELETE");
-		  res.setHeader("Access-Control-Allow-Headers", "authorization, content-type,"
-		 +
-		  "access-control-request-headers,access-control-request-method,accept,origin,authorization,x-requested-with"
-		  ); res.setHeader("Access-Control-Max-Age", "3600");
-		  res.setHeader("Access-Control-Allow-Credentials", "true");
-		 
-        
 		// JWT Token is in the form "Bearer token". Remove Bearer word and get
 		// only the Token
-		if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+		if (requestTokenHeader != null) {
 			jwtToken = requestTokenHeader.substring(7);
+			System.out.println("token -" + jwtToken);
 			try {
-				username = jwtUtil.getUsernameFromToken(jwtToken);
+				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
 			} catch (IllegalArgumentException e) {
-				
+				System.out.println("Unable to get JWT Token");
 			} catch (ExpiredJwtException e) {
-				
+				System.out.println("JWT Token has expired");
 			}
 		} else {
 			logger.warn("JWT Token does not begin with Bearer String");
 		}
-
+		System.out.println("Username - " + username);
 		// Once we get the token validate it.
 		if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-			UserDetails userDetails = this.jwtUserDetailsService.loadUserByUsername(username);
+			System.out.println("before load user");
+			UserDetails userDetails = this.userService.loadUserByUsername(username);
 
 			// if token is valid configure Spring Security to manually set
 			// authentication
-			if (jwtUtil.validateToken(jwtToken, userDetails)) {
+			if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
 
+				System.out.println("After validation of token");
 				UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
 						userDetails, null, userDetails.getAuthorities());
 				usernamePasswordAuthenticationToken
-				.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+						.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 				// After setting the Authentication in the context, we specify
 				// that the current user is authenticated. So it passes the
 				// Spring Security Configurations successfully.
@@ -88,9 +74,6 @@ HttpServletRequest req = (HttpServletRequest) request;
 			}
 		}
 		chain.doFilter(request, response);
-
 	}
 
 }
-
-

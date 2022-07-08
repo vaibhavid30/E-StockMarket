@@ -1,14 +1,10 @@
-package com.estockmarket.stockmarket;
+// package com.estockmarket.stockmarket;
 
+// @SpringBootTest
+// class StockmarketApplicationTests {
 
-import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-@SpringBootTest
-class StockmarketApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+// }
