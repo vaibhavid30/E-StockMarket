@@ -2,7 +2,9 @@ package com.estockmarket.stockmarket.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.UUID;
 
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
@@ -16,21 +18,18 @@ public class Stock implements Serializable {
     private UUID companyId;
     private String stockName;
     private BigDecimal stockPrice;
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String date; 
 
     public Stock() {
         stockId = UUID.randomUUID();
     }
 
-    public Stock(UUID stockId, String stockName, BigDecimal stockPrice, UUID companyId, LocalDate startDate,
-            LocalDate endDate) {
+    public Stock(UUID stockId, String stockName, BigDecimal stockPrice, UUID companyId, String date) {
         this.stockId = stockId;
         this.stockName = stockName;
         this.stockPrice = stockPrice;
         this.companyId = companyId;
-        this.startDate = startDate;
-        this.endDate = endDate;
+        this.date = date;
     }
 
     public UUID getStockId() {
@@ -65,20 +64,14 @@ public class Stock implements Serializable {
         this.companyId = companyId;
     }
 
-    public LocalDate getStartDate() {
-        return this.startDate;
+    public String getDate() {
+        return this.date;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return this.endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setDate() throws ParseException {
+        String pattern = "yyyy-MM-dd";
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        this.date = simpleDateFormat.format(new Date());
     }
 
 }

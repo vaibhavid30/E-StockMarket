@@ -12,10 +12,8 @@ import com.estockmarket.stockmarket.model.User;
 public interface UserRepository extends CassandraRepository<User, UUID>{
 
     @AllowFiltering
-    public User findByUsernameAndPassword(String UserName, String Password);
+    public User findByEmailAndPassword(String Email, String Password);
 
     @AllowFiltering
-    public User findByUsername(String username);;
-
-    public User findByName(String name);;
+    public User findByEmail(String email);
 }

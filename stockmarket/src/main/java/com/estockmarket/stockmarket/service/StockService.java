@@ -1,7 +1,7 @@
 package com.estockmarket.stockmarket.service;
 
+import java.text.ParseException;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,29 +17,41 @@ public class StockService {
     @Autowired(required = true)
     StockRepository stockRepository;
 	
-    public Stock saveStock(@RequestBody Stock stock) {
+    public Stock saveStock(@RequestBody Stock stock,UUID companyID) throws ParseException {
 		Stock stockSet = new Stock();
-		stockSet.setCompanyId(stock.getCompanyId());
-		stockSet.setEndDate(stock.getEndDate());
-		stockSet.setStartDate(stock.getStartDate());
+		stockSet.setCompanyId(companyID);
 		stockSet.setStockId(stock.getStockId());
 		stockSet.setStockName(stock.getStockName());
 		stockSet.setStockPrice(stock.getStockPrice());
+		stockSet.setDate();
 		return stockRepository.save(stockSet);
 	}
 
-	public Optional<Stock>  getStockByCompanyId(UUID companyId){
+	public Stock  getStockByCompanyId(UUID companyId){
 		return stockRepository.findStockBycompanyId(companyId);
 	}
 
-    public Optional<Stock> getStockByStockId(UUID stockId) {
-        return stockRepository.findById(stockId);
+	public void deleteAllStock(UUID companyid){
+		Stock stockDetails = stockRepository.findStockBycompanyId(companyid);
+		stockRepository.deleteById(stockDetails.getStockId());
+	}
+
+    public List<Stock> getAllStock() {
+        return stockRepository.findAll();
     }
 
-	public List<Stock> deleteStock(UUID companyid){
-		// stockRepository.deleteByCompanyId(companyid);
-		stockRepository.findStockBycompanyId(companyid).ifPresent(stock -> stockRepository.deleteByCompanyId(companyid));
-		return null;
+	public List<Stock> updateStockPrice(UUID stockId, Stock stockPrice) throws ParseException {
+
+		List<Stock> stockdetails = stockRepository.findStockByStockId(stockId);
+		if (stockdetails != null){
+
+			System.out.println("Stock Price" + stockPrice.getStockPrice());
+			stockdetails.get(0).setStockPrice(stockPrice.getStockPrice());
+			stockdetails.get(0).setDate();
+			stockRepository.saveAll(stockdetails);
+		}
+		System.out.println("Stock details" + stockdetails);
+		return stockdetails;
 	}
     
 }

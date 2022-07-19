@@ -12,17 +12,15 @@ public class Company implements Serializable {
 
     @PrimaryKey
     private UUID companyID;
-    private UUID userID;
     private String companyName;
     private String companyCEO;
     private BigDecimal companyTurnOver;
     private String companyWebsite;
     private String companyStockExchange;
 
-    public Company(UUID companyID, UUID userID, String companyName, String companyCEO, BigDecimal companyTurnOver,
+    public Company(UUID companyID, String companyName, String companyCEO, BigDecimal companyTurnOver,
             String companyWebsite, String companyStockExchange) {
         this.companyID = companyID;
-        this.userID = userID;
         this.companyName = companyName;
         this.companyCEO = companyCEO;
         this.companyTurnOver = companyTurnOver;
@@ -36,14 +34,6 @@ public class Company implements Serializable {
 
     public void setCompanyID(UUID companyID) {
         this.companyID = companyID;
-    }
-
-    public UUID getUserID() {
-        return this.userID;
-    }
-
-    public void setUserID(UUID userID) {
-        this.userID = userID;
     }
 
     public String getCompanyName() {

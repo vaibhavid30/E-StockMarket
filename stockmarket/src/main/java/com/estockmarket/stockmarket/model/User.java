@@ -1,27 +1,24 @@
 package com.estockmarket.stockmarket.model;
 
 import org.springframework.data.cassandra.core.mapping.Table;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.data.cassandra.core.mapping.PrimaryKey;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.UUID;
 
 @Table("user")
-public class User implements UserDetails{
+public class User implements Serializable{
     @PrimaryKey
     private UUID id;
     private String name;
-    private String username;
+    private String email;
     private String password;
 
 
-    public User(UUID id, String name, String username, String password) {
+    public User(UUID id, String name, String email, String password) {
         this.id = id;
         this.name = name;
-        this.username=username;
+        this.email=email;
         this.password = password;
     }
 
@@ -39,12 +36,12 @@ public class User implements UserDetails{
         this.name = name;
     }
 
-    public String getUsername() {
-        return this.username;
+    public String getEmail() {
+        return this.email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getPassword() {
@@ -57,44 +54,5 @@ public class User implements UserDetails{
 
     public User() {
         id = UUID.randomUUID();
-    }
-
-
-    public User(String username2, String password2) {
-    }
-
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-
-    @Override
-    public boolean isAccountNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-
-    @Override
-    public boolean isAccountNonLocked() {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-
-    @Override
-    public boolean isCredentialsNonExpired() {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-
-    @Override
-    public boolean isEnabled() {
-        // TODO Auto-generated method stub
-        return false;
     }
 }

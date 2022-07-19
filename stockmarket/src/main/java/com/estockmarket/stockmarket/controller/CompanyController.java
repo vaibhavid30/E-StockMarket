@@ -48,11 +48,4 @@ public class CompanyController {
          companyService.deleteCompany(companyid);
     }
 
-
-    //Custom API's
-    // List all companies registered by User
-    @GetMapping("/fetchUserCompanies/{userId}")
-    public List<Company> fetchUserCompanies(@PathVariable(value = "userId") UUID userId) {
-        return companyService.getCompanyByUserId(userId);
-    }
 }

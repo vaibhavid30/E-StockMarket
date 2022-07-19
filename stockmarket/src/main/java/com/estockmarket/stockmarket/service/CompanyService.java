@@ -26,12 +26,7 @@ public class CompanyService {
 		companySet.setCompanyStockExchange(company.getCompanyStockExchange());
 		companySet.setCompanyTurnOver(company.getCompanyTurnOver());
 		companySet.setCompanyWebsite(company.getCompanyWebsite());
-		companySet.setUserID(company.getUserID());
 		return companyRepository.save(companySet);
-	}
-
-	public List<Company> getCompanyByUserId(UUID userid) {
-		return companyRepository.findAllCompanyByuserID(userid);
 	}
 
 	public Company getCompanyById(UUID companyId) {
@@ -39,7 +34,7 @@ public class CompanyService {
 	}
 
 	public void deleteCompany(UUID companyid) {
-		 stockService.deleteStock(companyid);
+		 	stockService.deleteAllStock(companyid);
 			companyRepository.deleteById(companyid);
 	}
 
