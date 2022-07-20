@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estockmarket.stockmarket.model.Details;
+import com.estockmarket.stockmarket.model.MultipleStocks;
 import com.estockmarket.stockmarket.model.Stock;
+import com.estockmarket.stockmarket.service.MultipleStockService;
 import com.estockmarket.stockmarket.service.StockService;
 
 @RestController
@@ -24,6 +27,9 @@ public class StockController {
     
     @Autowired
     StockService stockService;
+
+    @Autowired
+    MultipleStockService multipleStockService;
 
     // Stock Registration
     @PostMapping("/add/{companyId}")
@@ -44,5 +50,10 @@ public class StockController {
     @PutMapping("/updateStockPrice/{stockID}")
     public List<Stock>  updateStockPrice( @PathVariable(value = "stockID") UUID stockId, @RequestBody Stock stockPrice) throws ParseException{
         return stockService.updateStockPrice(stockId , stockPrice);
+    }
+
+    @GetMapping("/findStockHistory")
+    public List<MultipleStocks>  getStockHistory(@RequestBody Details details) throws ParseException{
+        return multipleStockService.getStockHistory(details);
     }
 }

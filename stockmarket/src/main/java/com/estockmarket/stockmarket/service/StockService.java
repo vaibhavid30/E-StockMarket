@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.estockmarket.stockmarket.exception.DataNotAvailable;
 import com.estockmarket.stockmarket.model.Stock;
 import com.estockmarket.stockmarket.repositories.StockRepository;
 
@@ -16,6 +17,9 @@ public class StockService {
     
     @Autowired(required = true)
     StockRepository stockRepository;
+
+	@Autowired(required = true)
+	MultipleStockService multipleStockService;
 	
     public Stock saveStock(@RequestBody Stock stock,UUID companyID) throws ParseException {
 		Stock stockSet = new Stock();
@@ -24,6 +28,7 @@ public class StockService {
 		stockSet.setStockName(stock.getStockName());
 		stockSet.setStockPrice(stock.getStockPrice());
 		stockSet.setDate();
+		multipleStockService.saveStockData(stockSet);
 		return stockRepository.save(stockSet);
 	}
 
@@ -33,6 +38,7 @@ public class StockService {
 
 	public void deleteAllStock(UUID companyid){
 		Stock stockDetails = stockRepository.findStockBycompanyId(companyid);
+		multipleStockService.deleteAllStock(stockDetails.getStockId());
 		stockRepository.deleteById(stockDetails.getStockId());
 	}
 
@@ -48,7 +54,10 @@ public class StockService {
 			System.out.println("Stock Price" + stockPrice.getStockPrice());
 			stockdetails.get(0).setStockPrice(stockPrice.getStockPrice());
 			stockdetails.get(0).setDate();
+			multipleStockService.saveStockData(stockdetails.get(0));
 			stockRepository.saveAll(stockdetails);
+		}else{
+			throw new DataNotAvailable("Stocks not available in Database");
 		}
 		System.out.println("Stock details" + stockdetails);
 		return stockdetails;

@@ -19,6 +19,9 @@ public class CompanyService {
 	@Autowired(required = true)
 	StockService stockService;
 
+	@Autowired(required = true)
+	MultipleStockService multipleStockService;
+
 	public Company saveCompany(@RequestBody Company company) {
 		Company companySet = new Company();
 		companySet.setCompanyCEO(company.getCompanyCEO());
@@ -34,6 +37,7 @@ public class CompanyService {
 	}
 
 	public void deleteCompany(UUID companyid) {
+		
 		 	stockService.deleteAllStock(companyid);
 			companyRepository.deleteById(companyid);
 	}

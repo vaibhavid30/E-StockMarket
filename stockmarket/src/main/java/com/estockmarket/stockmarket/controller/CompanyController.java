@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.estockmarket.stockmarket.exception.DataNotAvailable;
+import com.estockmarket.stockmarket.exception.ResourceIdNotFound;
 import com.estockmarket.stockmarket.model.Company;
 import com.estockmarket.stockmarket.service.CompanyService;
 
@@ -33,13 +35,24 @@ public class CompanyController {
     // Get all Companies
     @GetMapping("/info/{companyId}")
     public Company fetchCompanyDetails(@PathVariable(value = "companyId") UUID companyId) {
-        return companyService.getCompanyById(companyId);
+        Company company = companyService.getCompanyById(companyId);
+        if(company != null){
+                return company;
+        }else{
+            throw new ResourceIdNotFound("Company not registered for given Id");
+        }
     }
 
     // Get Company details with Company ID
     @GetMapping("/getall")
     public List<Company> ListAllCompanies() {
-        return companyService.getAllCompanies();
+        List<Company> companyList = companyService.getAllCompanies();
+        if(companyList != null){
+            return companyList;
+        }else{
+            throw new DataNotAvailable("Companies not available in database");
+        }
+        
     }
 
     // Delete Company with Company ID
