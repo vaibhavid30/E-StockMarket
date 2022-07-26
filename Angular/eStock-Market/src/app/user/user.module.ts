@@ -11,6 +11,7 @@ import { CompanyRegisterComponent } from './company-register/company-register.co
 import { AllCompaniesComponent } from './all-companies/all-companies.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { ViewStockDetailsComponent } from './view-stock-details/view-stock-details.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
     CompanyRegisterComponent,
     AllCompaniesComponent,
     PageNotFoundComponent,
+    ViewStockDetailsComponent,
   ],
   imports: [
     CommonModule,

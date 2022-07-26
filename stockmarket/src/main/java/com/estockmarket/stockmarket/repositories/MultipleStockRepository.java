@@ -17,10 +17,12 @@ public interface MultipleStockRepository extends CassandraRepository<MultipleSto
 
     @AllowFiltering
     public List<MultipleStocks> findMultipleStocksByStockId(UUID stockId);
-
+    
+    @AllowFiltering
     @Query("delete from multipleStock  where stockid = ?0")
     public void deleteByStockId(UUID stockID);
 
+    @AllowFiltering
     @Query("select * from multipleStock  where stockid = ?2 AND date >= ?0 AND date < ?1 ALLOW FILTERING")
 public List<MultipleStocks> getMultipleStocksByDate(LocalDate dateBefore, LocalDate dateAfter, UUID stockId);
 }

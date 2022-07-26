@@ -52,7 +52,7 @@ public class StockController {
         return stockService.updateStockPrice(stockId , stockPrice);
     }
 
-    @GetMapping("/findStockHistory")
+    @PostMapping("/findStockHistory")
     public List<MultipleStocks>  getStockHistory(@RequestBody Details details) throws ParseException{
         return multipleStockService.getStockHistory(details);
     }

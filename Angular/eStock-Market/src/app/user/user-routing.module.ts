@@ -4,6 +4,7 @@ import { AllCompaniesComponent } from './all-companies/all-companies.component';
 import { CompanyRegisterComponent } from './company-register/company-register.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
+import { ViewStockDetailsComponent } from './view-stock-details/view-stock-details.component';
 import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path: 'welcome', component: WelcomeComponent},
   {path: 'companyregister', component: CompanyRegisterComponent},
   {path: 'getallcompanies', component: AllCompaniesComponent},
+  {path: 'getStockDetails', component: ViewStockDetailsComponent},
 ];
 
 @NgModule({
