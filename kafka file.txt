@@ -1,0 +1,13 @@
+.\bin\windows\zookeeper-server-start.bat config\zookeeper.properties
+
+.\bin\windows\kafka-server-start.bat config\server.properties
+
+.\bin\windows\kafka-topics.bat --create --bootstrap-server localhost:9092 --replication-factor 1 --partitions 1 --topic test
+
+.\bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic kafkaUserTopicCheck
+
+.\bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic kafkaUserTopicCheck
+
+
+D:\sw\kafka_2.12-3.2.0
+D:\e-Stock
