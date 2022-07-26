@@ -40,7 +40,7 @@ public class MultipleStockService {
      //   System.out.println(formatter.format(cal.getTime()));
 
      DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-LocalDate date = LocalDate.parse("2022-07-22", formatter);
+LocalDate date = LocalDate.parse(stock.getDate(), formatter);
 System.out.println(date);
         stockData.setDate(date);
         System.out.println("Date: "+date);

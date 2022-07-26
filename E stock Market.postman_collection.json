@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "e911557d-fc23-4311-8797-df6eb6d08e5d",
+		"_postman_id": "905b047c-73c0-4213-9004-098f62f57290",
 		"name": "E stock Market",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -18,7 +18,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"user3\",\r\n    \"username\":\"user3@gmail.com\",\r\n    \"password\" : \"user3\"\r\n}\r\n",
+							"raw": "{\r\n    \"name\":\"user\",\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\" : \"user\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -26,11 +26,43 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/market/user/register",
+							"raw": "localhost:8081/market/user/register",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
+							"path": [
+								"market",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register User Copy",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"user\",\r\n    \"email\":\"user@gmail.com\",\r\n    \"password\" : \"user\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/market/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
 							"path": [
 								"market",
 								"user",
@@ -42,15 +74,18 @@
 				},
 				{
 					"name": "Login using JWT Token",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"auth": {
 							"type": "noauth"
 						},
-						"method": "POST",
+						"method": "GET",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\":\"user2@gmail.com\",\r\n    \"password\" : \"user\"\r\n}\r\n",
+							"raw": "{\r\n    \"email\":\"user1@gmail.com\",\r\n    \"password\" : \"user1\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -58,15 +93,15 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/market/user/authenticate",
+							"raw": "localhost:8081/market/user/login",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"market",
 								"user",
-								"authenticate"
+								"login"
 							]
 						}
 					},
@@ -84,7 +119,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"userID\":\"14f041dc-b42d-4cad-810d-ce902be197fc\",\r\n    \"companyName\":\"Cognizant\",\r\n    \"companyCEO\":\"Siddhant Shah\",\r\n    \"companyTurnOver\":10273017938,\r\n    \"companyWebsite\":\"www.Cognizant.com\",\r\n    \"companyStockExchange\":\"NSE\"\r\n}",
+							"raw": "{\r\n    \"userID\":\"212e0df3-cd3a-48d6-bf19-4e454eb6563c\",\r\n    \"companyName\":\"Cybage\",\r\n    \"companyCEO\":\"Shah\",\r\n    \"companyTurnOver\":1017938,\r\n    \"companyWebsite\":\"www.Cybage.com\",\r\n    \"companyStockExchange\":\"NSE\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -92,11 +127,11 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/market/company/register",
+							"raw": "localhost:8081/market/company/register",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"market",
 								"company",
@@ -112,6 +147,9 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -124,16 +162,16 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/market/company/fetchUserCompanies/0f872706-2508-4ca2-b727-59ed1851edf6",
+							"raw": "localhost:8081/market/company/fetchUserCompanies/212e0df3-cd3a-48d6-bf19-4e454eb6563c",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"market",
 								"company",
 								"fetchUserCompanies",
-								"0f872706-2508-4ca2-b727-59ed1851edf6"
+								"212e0df3-cd3a-48d6-bf19-4e454eb6563c"
 							]
 						}
 					},
@@ -145,16 +183,16 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/market/company/info/91c07381-4017-410d-ae58-788169b37ced",
+							"raw": "localhost:8081/market/company/info/89e7e209-9525-460f-8c64-3f4f42b63526",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"market",
 								"company",
 								"info",
-								"91c07381-4017-410d-ae58-788169b37ced"
+								"89e7e209-9525-460f-8c64-3f4f42b63526"
 							]
 						}
 					},
@@ -213,7 +251,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"stockName\":\"Cybage Graffiti\",\r\n    \"stockPrice\":\"244.65\",\r\n    \"companyId\":\"b6b59234-b059-442f-920f-41289dbc328a\",\r\n    \"startDate\":\"2022-06-10\",\r\n    \"endDate\":\"2022-06-11\"\r\n}\r\n",
+							"raw": "{\r\n    \"stockName\":\"Cybage Graffiti\",\r\n    \"stockPrice\":\"244.65\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -221,15 +259,46 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/market/stock/register",
+							"raw": "localhost:8081/market/stock/add/89e7e209-9525-460f-8c64-3f4f42b63526",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"market",
 								"stock",
-								"register"
+								"add",
+								"89e7e209-9525-460f-8c64-3f4f42b63526"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateStockPrice",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stockPrice\":\"244.65\"\r\n  \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/market/stock/updateStockPrice/f6037616-d7b2-4d07-9884-b2e7be1b6b75",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"market",
+								"stock",
+								"updateStockPrice",
+								"f6037616-d7b2-4d07-9884-b2e7be1b6b75"
 							]
 						}
 					},
@@ -241,15 +310,47 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/market/stock/",
+							"raw": "localhost:8081/market/stock/findallstock",
 							"host": [
 								"localhost"
 							],
-							"port": "8080",
+							"port": "8081",
 							"path": [
 								"market",
 								"stock",
-								""
+								"findallstock"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Multiple Stocks(StockHistory)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stockName\":\"Cybage Graffiti\",\r\n    \"stockPrice\":\"4.65\",\r\n    \"date\":\"2022/07/20\",\r\n    \"endDate\":\"2022/07/20\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8081/market/stock/findStockHistory",
+							"host": [
+								"localhost"
+							],
+							"port": "8081",
+							"path": [
+								"market",
+								"stock",
+								"findStockHistory"
 							]
 						}
 					},
